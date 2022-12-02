@@ -42,6 +42,8 @@ public class RubyController : MonoBehaviour
 
     public bool canChangeLevel = false;
 
+    public GameObject bomb;
+
     private void Awake()
     {
         loseMessage.SetActive(false);
@@ -94,6 +96,12 @@ public class RubyController : MonoBehaviour
                 Launch();
             }
 
+        }
+
+        if(Input.GetKeyDown(KeyCode.B)){
+            if(ammo > 2){
+                Place();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.X))
@@ -179,6 +187,13 @@ public class RubyController : MonoBehaviour
         this.PlaySound(cogSound);
 
         ammo--;
+    }
+
+    void Place(){
+        GameObject bombObject = Instantiate(bomb, rigidbody2d.position, Quaternion.identity);
+        bombObject.GetComponent<BombController>().GetRubyController(this);
+
+        ammo -= 3;
     }
 
     public void PlaySound(AudioClip clip)

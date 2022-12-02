@@ -39,6 +39,11 @@ public class Projectile : MonoBehaviour
             hE.Fix();
         }
 
+        SlowbotController sB = other.collider.GetComponent<SlowbotController>();
+        if(sB != null){
+            sB.Fix();
+        }
+
         Destroy(gameObject);
     }
 
